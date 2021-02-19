@@ -8,7 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ListeComponent } from './components/bodyoftodos/liste/liste.component';
 import { DetailComponent } from './components/bodyoftodos/detail/detail.component';
 import { BodyComponent } from './components/bodyoftodos/body/body.component';
-import { ItemComponent } from './components/bodyoftodos/item/item.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,13 @@ import { ItemComponent } from './components/bodyoftodos/item/item.component';
     LoginComponent,
     ListeComponent,
     DetailComponent,
-    BodyComponent,
-    ItemComponent
+    BodyComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
