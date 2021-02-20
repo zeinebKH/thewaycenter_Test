@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Todos } from '../models/todos';
 
-const baseUrl = 'http://localhost:8080/api/body';
+const baseUrl = 'http://localhost:3000/api/body';
 
 @Injectable({
   providedIn: 'root'

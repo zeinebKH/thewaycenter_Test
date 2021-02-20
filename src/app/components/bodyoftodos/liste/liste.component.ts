@@ -1,5 +1,4 @@
-import { Component, OnInit ,EventEmitter ,Input ,Output} from '@angular/core';
-import { from } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Todos } from 'src/app/models/todos';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -9,15 +8,58 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./liste.component.css']
 })
 export class ListeComponent implements OnInit {
-  @Input() todos =  Todos;
- @Output() selectedTodo = new EventEmitter();
-
-  constructor() { }
+todoo?: Todos[];
+currentTask?: Todos;
+currentIndex = -1;
+title = '';        
+  constructor(private taskservice: TaskService) { }
 
   ngOnInit(): void {
   }
-  selectTodo(){
-    this.selectedTodo.emit(this.selectedTodo);
+  retrieveTask(): void {
+    this.taskservice.getAll()
+      .subscribe(
+        data => {
+          this.todoo = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
+  refreshList(): void {
+    this.retrieveTask();
+    this.currentTask = undefined;
+    this.currentIndex = -1;
+  }
+
+  setActiveTask(todoo: Todos, index: number): void {
+    this.currentTask = todoo;
+    this.currentIndex = index;
+  }
+
+  removeAllTask(): void {
+    this.taskservice.deleteAll()
+      .subscribe(
+        response => {
+          console.log(response);
+          this.refreshList();
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  searchTitle(): void {
+    this.taskservice.findByTitle(this.title)
+      .subscribe(
+        data => {
+          this.todoo = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
 }

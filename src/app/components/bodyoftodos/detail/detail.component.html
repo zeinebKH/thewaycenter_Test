@@ -1,58 +1,82 @@
 <div class="col-md-12 col-sm-12">
-<div class="card-container">
-    <div class="card">
-        <div class="front">
-            <div class="cover">
-                <img src="assets\images\9294-1504023855-organisation.jpg"/>
-            </div>
-            <div class="content">
-                <div class="main">
-                    <h3 class="name">Description</h3>
-                    <p class="profession">Tasks </p>
-                    <p class="text-center">"I'm the new Sinatra, and since I made it here 
-                        I can make it anywhere, yeah, they love me everywhere Blablablaaaaa"</p>
+    <div class="">
+        <div class="card">
+            <div class="front">
+                <div class="cover">
+                    <img src="assets\images\9294-1504023855-organisation.jpg"/>
                 </div>
-                <div class="footer">
-                    <div class="rating">
-                        <i class="fa fa-mail-forward"></i> Auto Rotation
+                <div class="content">
+                    <div class="main">
+                        <h3 class="name">Description</h3>
+                        <p class="profession">Tasks </p>
+                        <div>
+                            <div *ngIf="currentTask.id" class="edit-form">
+                            <h4>Tasks</h4>
+                            <form>
+                                <div class="form-group">
+                                <label for="title">Title</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="title"
+                                    [(ngModel)]="currentTask.title"
+                                    name="title"
+                                />
+                                </div>
+                                <div class="form-group">
+                                <label for="description">Description</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="description"
+                                    [(ngModel)]="currentTask.description"
+                                    name="description"
+                                />
+                                </div>
+                        
+                                <div class="form-group">
+                                <label><strong>Status:</strong></label>
+                                {{ currentTask.Status ? "Published" : "Pending" }}
+                                </div>
+                            </form>
+                        
+                            <button
+                                class="badge badge-primary mr-2"
+                                *ngIf="currentTask.Status"
+                                (click)="updateStatus(false)"
+                            >
+                                Uncomplite
+                            </button>
+                            <button
+                                *ngIf="!currentTask.Status"
+                                class="badge badge-primary mr-2"
+                                (click)="updateStatus(true)"
+                            >
+                                Completed
+                            </button>
+                        
+                            <button class="badge badge-danger mr-2" (click)="deleteTask()">
+                                Delete
+                            </button>
+                        
+                            <button
+                                type="submit"
+                                class="badge badge-success mb-2"
+                                (click)="updateTask()"
+                            >
+                                Update
+                            </button>
+                            <p>{{ message }}</p>
+                            </div>
+                        
+                            <div *ngIf="!currentTask.id">
+                            <br />
+                            <p>Cannot access this Task...</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div> <!-- end front panel -->
-        <div class="back">
-            <div class="header">
-                <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
-            </div>
-            <div class="content">
-                <div class="main">
-                    <h4 class="text-center">Job Description</h4>
-                    <p class="text-center">Web design, Adobe Photoshop, HTML5,
-                         CSS3, Corel and many others...</p>
-
-                    <div class="stats-container">
-                        <div class="stats">
-                            <h4>235</h4>
-                            <p>
-                                Followers
-                            </p>
-                        </div>
-                        <div class="stats">
-                            <h4>114</h4>
-                            <p>
-                                Following
-                            </p>
-                        </div>
-                        <div class="stats">
-                            <h4>35</h4>
-                            <p>
-                                Projects
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div> <!-- end back panel -->
-    </div> <!-- end card -->
-</div> <!-- end card-container -->
+            </div> 
+        </div> 
+    </div> 
 </div>
